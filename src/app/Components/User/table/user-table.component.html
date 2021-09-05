@@ -1,0 +1,31 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Nombre</th>
+    <th scope="col">Correo</th>
+    <th scope="col">Fecha nacimiento</th>
+    <th scope="col">Estado Civil</th>
+    <th scope="col">Telefono</th>
+    <th scope="col">Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of usersToShow;">
+    <td>{{ user.name }}</td>
+    <td>{{user.email}}</td>
+    <td>{{user.birth_date}}</td>
+    <td>{{translateCivilStatus(user.civil_status)}}</td>
+    <td>{{user.phone}}</td>
+    <td>
+      <button class="btn btn-danger" (click)="eliminateUser(user)">Eliminar</button>
+      <a class="btn btn-primary ml-1" [routerLink]="['/user/edit', user.id ]">Editar</a>
+    </td>
+
+  </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshUsers()">
+  </ngb-pagination>
+</div>
